@@ -13,9 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const textArea = e.target.querySelector('.swipe-form__textarea');
       const div = document.createElement('div');
       div.classList.add('added-text__text');
-      div.innerHTML = textArea.value;
       textBlock.prepend(div);
+      animate(textArea.value, textBlock);
       textArea.value = '';
+    }
+
+    function animate(text, textBlock) {
+      text = [...text];
+      for (let i = 0; i < text.length; i++) {
+        (function (i) {
+          setTimeout(function () {
+            const texts = document.createTextNode(text[i]);            
+            textBlock.firstElementChild.appendChild(texts);
+          }, 75 * i);
+        })(i);
+      }
     }
   })();
 
